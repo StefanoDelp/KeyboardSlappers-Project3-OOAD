@@ -11,10 +11,15 @@ public class Store
     {
         this.daysLeftInMonth  = 35;
         this.toolsLeft = 25;
-        CreateTools();
-        CreateCustomers();
+        createTools();
+        createCustomers();
     }
-    public void CreateTools()
+    public int getRentTime(int maxAllowed)
+    {
+        return 1;
+    }
+
+    public void createTools()
     {
         WoodworkingTool woodworkingTool1 = new WoodworkingTool("woodworkingTool1");
         this.Tools.add(woodworkingTool1);
@@ -100,7 +105,7 @@ public class Store
 
     }
     
-    public void CreateCustomers()
+    public void createCustomers()
     {
 
     }

@@ -1,8 +1,9 @@
-public abstract class regularCustomer extends Customer
+public class RegularCustomer extends Customer
 {
-    public regularCustomer()
+    public RegularCustomer()
     {
         this.maxTools = 2;
         this.maxNights = 5;
     }
+
 }
