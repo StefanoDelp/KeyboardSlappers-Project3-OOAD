@@ -4,10 +4,11 @@ public abstract class Tool
     Integer dayyLeftOnRent;
     Integer pricePerDay;
     String name;
+    Boolean isRented;
 
-    public Tool(String Name,Integer Price)
+    public Tool(String Name)
     {
-        this.pricePerDay = Price;
+        this.pricePerDay = null;
         this.name = Name;
     }
     public Integer getPricePerDay()
