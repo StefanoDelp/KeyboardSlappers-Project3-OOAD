@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Store
 {
@@ -6,6 +7,8 @@ public class Store
     int toolsLeft;
     ArrayList<Tool> Tools;
     ArrayList<Customer> Customers;
+    ArrayList<Rental> ActiveRentals;
+    ArrayList<Rental> AllRentals;
 
     public Store()
     {
@@ -16,7 +19,9 @@ public class Store
     }
     public int getRentTime(int maxAllowed)
     {
-        return 1;
+        Random random = new Random();
+        int randomInteger = random.nextInt(10);
+        return randomInteger;
     }
 
     public void createTools()
@@ -107,6 +112,6 @@ public class Store
     
     public void createCustomers()
     {
-
+        
     }
 }

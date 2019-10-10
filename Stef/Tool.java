@@ -10,10 +10,22 @@ public abstract class Tool
     {
         this.pricePerDay = null;
         this.name = Name;
+        this.isRented = false;
     }
     public Integer getPricePerDay()
     {
         return pricePerDay;
+    }
+    public void GettingRented(int nights)
+    {
+        this.isRented = true;
+        this.dayyLeftOnRent = nights;   
+    }
+
+    public void ReturnTool()
+    {
+        this.isRented = false;
+        this.dayyLeftOnRent = 0;
     }
 
 }
