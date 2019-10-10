@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Store
 {
@@ -7,8 +6,6 @@ public class Store
     int toolsLeft;
     ArrayList<Tool> Tools;
     ArrayList<Customer> Customers;
-    ArrayList<Rental> ActiveRentals;
-    ArrayList<Rental> AllRentals;
 
     public Store()
     {
@@ -19,9 +16,7 @@ public class Store
     }
     public int getRentTime(int maxAllowed)
     {
-        Random random = new Random();
-        int randomInteger = random.nextInt(10);
-        return randomInteger;
+        return 1;
     }
 
     public void createTools()
@@ -109,9 +104,25 @@ public class Store
 
 
     }
-
+    /*
+    On each day, a random number of customers will visit the store as long as there 
+    are tools to rent.  Each customer will create one Rental Record that follows the 
+    rules of their associated type before they leave the store.  That is, no customer 
+    will show up and then leave without making a rental.  Note: if the store has less 
+    than 3 tools, then a Business customer will NOT arrive (as they wouldn't be able 
+    to create a Rental that follows their rules).  As soon as the store has zero tools, 
+    customers will magically stop arriving until tools are once again available.
+    */
     public void createCustomers()
     {
+        Rental rentalRecord1 = new Rental();
+        this.Rental.add(rentalRecordOne);
+
+        Rental rentalRecord2 = new Rental();
+        this.Rental.add(rentalOne);
+
+        Rental rentalRecord3 = new Rental();
+        this.Rental.add(rentalOne);
         
     }
 }
