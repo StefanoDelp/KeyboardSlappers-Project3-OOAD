@@ -115,14 +115,42 @@ public class Store
     */
     public void createCustomers()
     {
-        Rental rentalRecord1 = new Rental();
-        this.Rental.add(rentalRecordOne);
+        CasualCustomer casualCustomer1 = new CasualCustomer();
+        this.Customer.add(casualCustomer1);
 
-        Rental rentalRecord2 = new Rental();
-        this.Rental.add(rentalOne);
+        CasualCustomer casualCustomer2 = new CasualCustomer();
+        this.Customer.add(casualCustomer2);
 
-        Rental rentalRecord3 = new Rental();
-        this.Rental.add(rentalOne);
-        
+        CasualCustomer casualCustomer3 = new CasualCustomer();
+        this.Customer.add(casualCustomer3);
+
+        CasualCustomer casualCustomer4 = new CasualCustomer();
+        this.Customer.add(casualCustomer4);
+
+
+        BusinessCustomer businessCustomer1 = new BusinessCustomer();
+        this.Customer.add(businessCustomer1);
+
+        BusinessCustomer businessCustomer2 = new BusinessCustomer();
+        this.Customer.add(businessCustomer2)
+
+        BusinessCustomer businessCustomer3 = new BusinessCustomer();
+        this.Customer.add(businessCustomer3)
+
+        BusinessCustomer businessCustomer4 = new BusinessCustomer();
+        this.Customer.add(businessCustomer4)
+
+
+        RegularCustomer regularCustomer1 = new RegularCustomer();
+        this.Customer.add(regularCustomer1);
+
+        RegularCustomer regularCustomer2 = new RegularCustomer();
+        this.Customer.add(regularCustomer2);
+
+        RegularCustomer regularCustomer3 = new RegularCustomer();
+        this.Customer.add(regularCustomer3);
+
+        RegularCustomer regularCustomer4 = new RegularCustomer();
+        this.Customer.add(regularCustomer4);
     }
 }
