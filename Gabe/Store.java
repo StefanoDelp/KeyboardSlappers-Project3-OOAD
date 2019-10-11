@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 
+
+import com.sun.tools.javac.code.Attribute.Array;
 public class Store
 {
     int daysLeftInMonth;
     int toolsLeft;
     ArrayList<Tool> Tools;
     ArrayList<Customer> Customers;
+    ArrayList<Customer> availableCustomers;
+    ArrayList<Customer> unavailableCustomers;
 
     public Store()
     {
@@ -152,5 +156,22 @@ public class Store
 
         RegularCustomer regularCustomer4 = new RegularCustomer();
         this.Customer.add(regularCustomer4);
+    }
+
+    public void CheckCustomner()
+    {
+        this.unavailableCustomers.clear();
+        this.availableCustomers.clear();
+        for (Customer item : Customers) 
+        { 
+            if (item.canRent == true) 
+            {
+                this.availableCustomers.add(item);
+            }
+            else
+            {
+                this.unavailableCustomers.add(item);
+            }
+        }
     }
 }
