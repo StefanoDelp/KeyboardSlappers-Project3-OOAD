@@ -13,6 +13,10 @@ public class Store
     ArrayList<Rental> ActiveRentals;
 
     ArrayList<Rental> AllRentals;
+    rrayList<Customer> availableCustomers;
+    ArrayList<Customer> unavailableCustomers;
+    ArrayList<Rental> ToolsRented;
+    ArrayList<Rental> ToolsNotRented;
     //rental id  print out rentals over the whole month.
     int rentalsSoFar;
 
@@ -117,6 +121,35 @@ public class Store
 
     public void createCustomers()
     {
-        
+        this.unavailableCustomers.clear();
+        this.availableCustomers.clear();
+        for (Customer item : Customers) 
+        { 
+            if (item.canRent == true) 
+            {
+                this.availableCustomers.add(item);
+            }
+            else
+            {
+                this.unavailableCustomers.add(item);
+            }
+        }
+    }
+
+    public void CheckTools()
+    {
+        this.ToolsNotRented.clear();
+        this.ToolsRented.clear();
+        for (Tool item : Tools) 
+        { 
+            if (item.canRent == false) 
+            {
+                this.ToolsNotRented.add(item);
+            }
+            else
+            {
+                this.ToolsRented.add(item);
+            }
+        }
     }
 }
