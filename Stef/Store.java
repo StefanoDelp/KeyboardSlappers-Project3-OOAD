@@ -4,23 +4,32 @@ import java.util.Random;
 public class Store
 {
     int daysLeftInMonth;
+    //list of tools
     int toolsLeft;
     ArrayList<Tool> Tools;
+    //another list customers that can rent
     ArrayList<Customer> Customers;
+
     ArrayList<Rental> ActiveRentals;
+
     ArrayList<Rental> AllRentals;
+    //rental id  print out rentals over the whole month.
+    int rentalsSoFar;
 
     public Store()
     {
         this.daysLeftInMonth  = 35;
+        //probaly list of tools
         this.toolsLeft = 25;
+
         createTools();
         createCustomers();
     }
-    public int getRentTime(int maxAllowed)
+    public int getRentTime(int maxAllowed,int minAllowed)
     {
         Random random = new Random();
-        int randomInteger = random.nextInt(10);
+        //fix this
+        int randomInteger = random.nextInt(minAllowed,maxAllowed);
         return randomInteger;
     }
 
@@ -75,39 +84,35 @@ public class Store
 
 
         PaintingTool paintingTool1 = new PaintingTool("paintTool1");
-        Tools.add(paintingTool1);
+        this.Tools.add(paintingTool1);
 
         PaintingTool paintingTool2 = new PaintingTool("paintingTool2");
-        Tools.add(paintingTool2);
+        this.Tools.add(paintingTool2);
 
         PaintingTool paintingTool3 = new PaintingTool("paintingTool3");
-        Tools.add(paintingTool3);
+        this.Tools.add(paintingTool3);
 
         PaintingTool paintingTool4 = new PaintingTool("paintingTool4");
-        Tools.add(paintingTool4);
+        this.Tools.add(paintingTool4);
 
         PaintingTool paintingTool5 = new PaintingTool("paintingTool5");
-        Tools.add(paintingTool5);
+        this.Tools.add(paintingTool5);
 
 
         YardworkTool yardworkTool1 = new YardworkTool("yardworkTool1");
-        Tools.add(yardworkTool1);
+        this.Tools.add(yardworkTool1);
 
         YardworkTool yardworkTool2 = new YardworkTool("yardworkTool2");
-        Tools.add(yardworkTool2);
+        this.Tools.add(yardworkTool2);
 
         YardworkTool yardworkTool3 = new YardworkTool("yardworkTool3");
-        Tools.add(yardworkTool3);
+        this.Tools.add(yardworkTool3);
 
         YardworkTool yardworkTool4 = new YardworkTool("yardworkTool4");
-        Tools.add(yardworkTool4);
+        this.Tools.add(yardworkTool4);
 
         YardworkTool yardworkTool5 = new YardworkTool("yardworkTool5");
-        Tools.add(yardworkTool5);
-
-
-
-
+        this.Tools.add(yardworkTool5);
     }
 
     public void createCustomers()

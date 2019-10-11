@@ -6,6 +6,7 @@ public class Customer
     int maxTools;
     int maxNights;
     boolean canRent;
+    int minNights;
 
 
     //I dont know if this is still needed.
