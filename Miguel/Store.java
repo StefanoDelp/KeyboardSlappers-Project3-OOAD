@@ -9,6 +9,8 @@ public class Store
     ArrayList<Customer> Customers;
     ArrayList<Rental> ActiveRentals;
     ArrayList<Rental> AllRentals;
+    ArrayList<Rental> ToolsRented;
+    ArrayList<Rental> ToolsNotRented;
 
     public Store()
     {
