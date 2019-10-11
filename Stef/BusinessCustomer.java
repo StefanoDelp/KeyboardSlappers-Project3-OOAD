@@ -5,5 +5,4 @@ public class BusinessCustomer extends Customer
         this.maxTools = 3;
         this.maxNights = 7;
     }
-
 }

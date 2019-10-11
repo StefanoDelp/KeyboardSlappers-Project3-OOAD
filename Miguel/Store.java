@@ -116,4 +116,21 @@ public class Store
     {
         
     }
+
+    public void CheckTools()
+    {
+        this.ToolsNotRented.clear();
+        this.ToolsRented.clear();
+        for (Tool item : Tools) 
+        { 
+            if (item.canRent == false) 
+            {
+                this.ToolsNotRented.add(item);
+            }
+            else
+            {
+                this.ToolsRented.add(item);
+            }
+        }
+    }
 }

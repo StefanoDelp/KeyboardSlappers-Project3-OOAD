@@ -10,6 +10,8 @@ public class Store
     ArrayList<Customer> Customers;
     ArrayList<Customer> availableCustomers;
     ArrayList<Customer> unavailableCustomers;
+    ArrayList<Customer> availableTools;
+    ArrayList<Customer> unavailableTools;
 
     public Store()
     {
@@ -18,6 +20,7 @@ public class Store
         createTools();
         createCustomers();
     }
+    
     public int getRentTime(int maxAllowed)
     {
         return 1;
@@ -174,4 +177,23 @@ public class Store
             }
         }
     }
+
+    public void CheckTools()
+    {
+        this.unavailableTools.clear();
+        this.availableTools.clear();
+        for (Tool item : Tools) 
+        { 
+            if (item.canRent == false) 
+            {
+                this.availableTools.add(item);
+            }
+            else
+            {
+                this.unavailableTools.add(item);
+            }
+        }
+    }
+
+
 }
