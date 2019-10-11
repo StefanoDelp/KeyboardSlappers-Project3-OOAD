@@ -3,7 +3,9 @@ import java.util.*;
 public class Customer
 {
     ArrayList<Rental> rentals;
+    int minTools;
     int maxTools;
+    int minNights;
     int maxNights;
     boolean canRent;
 
