@@ -9,6 +9,9 @@ public class Rental
     ArrayList<Tool> tools;
     Customer customer;
     int rentalLength;
+    int numberofCords;
+    int numberOfKits;
+    int numberOfGear;
 
     //going to need this to take in 3 more things for all the extenstions 
     public Rental(Customer customer,ArrayList<Tool> tools,int nights,int numberofCords,int numberOfKits,int numberOfGear)
@@ -19,6 +22,9 @@ public class Rental
         this.customer = customer;
         this.rentalLength = nights;
         this.daysLeftOnRental = nights;
+        this.numberOfGear = numberOfGear;
+        this.numberOfKits = numberOfKits;
+        this.numberofCords = numberofCords;
         this.totalCost = GetTotalPrice(tools, nights, numberofCords, numberOfKits, numberOfGear);
         Rent(customer,tools);
     }

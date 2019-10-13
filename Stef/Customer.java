@@ -7,7 +7,12 @@ public class Customer
     int maxNights;
     boolean canRent;
     int minNights;
+    String Name;
 
+    public Customer(String NewName)
+    {
+        this.Name = NewName;
+    }
 
     //I dont know if this is still needed.
     public void RentTool(Rental rental)

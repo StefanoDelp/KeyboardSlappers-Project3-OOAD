@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Store
 {
-    int daysLeftInMonth;
+    int Day;
     //list of tools
     int toolsLeft;
     ArrayList<Tool> Tools;
@@ -11,18 +11,24 @@ public class Store
     ArrayList<Customer> Customers;
 
     ArrayList<Rental> ActiveRentals;
-
     ArrayList<Rental> AllRentals;
-    rrayList<Customer> availableCustomers;
+    ArrayList<Rental> CompletedRentals;
+
+    ArrayList<Customer> availableCustomers;
     ArrayList<Customer> unavailableCustomers;
-    ArrayList<Rental> ToolsRented;
-    ArrayList<Rental> ToolsNotRented;
+
+    ArrayList<Tool> ToolsRented;
+    ArrayList<Tool> ToolsNotRented;
+
+    int Money;
+    int MoneyToday;
+
     //rental id  print out rentals over the whole month.
     int rentalsSoFar;
 
     public Store()
     {
-        this.daysLeftInMonth  = 35;
+        this.Day  = 0;
         //probaly list of tools
         this.toolsLeft = 25;
 
@@ -33,7 +39,7 @@ public class Store
     {
         Random random = new Random();
         //fix this
-        int randomInteger = random.nextInt(minAllowed,maxAllowed);
+        int randomInteger = random.nextInt((maxAllowed-minAllowed)+1)+minAllowed;
         return randomInteger;
     }
 
@@ -142,7 +148,7 @@ public class Store
         this.ToolsRented.clear();
         for (Tool item : Tools) 
         { 
-            if (item.canRent == false) 
+            if (item.isRented == false) 
             {
                 this.ToolsNotRented.add(item);
             }
@@ -150,6 +156,72 @@ public class Store
             {
                 this.ToolsRented.add(item);
             }
+        }
+    }
+
+    public void RunDay()
+    {
+        System.out.println("Today is Day"+this.Day);
+        printCompletedRentals(this.CompletedRentals);
+        PrintActiveRentals(this.ActiveRentals);
+        PrintToolsLeft(this.ToolsRented);
+        System.out.print("We made"+ this.MoneyToday +"today" );  
+    }
+
+    public void CloseStore()
+    {
+        System.out.print("Over 35 days we had"+ this.AllRentals.size());
+        System.out.print("For a total of $"+ this.Money );
+    }
+
+    public void printCompletedRentals(ArrayList<Rental> Rentals)
+    {
+        System.out.println("There are currently "+ Rentals.size()+ "completed rentals." );
+        for (Rental item : Rentals)
+        {
+            System.out.print(item.rentalID );
+            System.out.print("Rented to" + item.customer.Name);
+            System.out.print("Contaning Tools:" );
+            for (Tool tool : item.tools)
+            {
+                System.out.print(tool.name);
+            }
+            System.out.print("With" + item.numberOfGear+ "Protective Gear");
+            System.out.print(item.numberOfKits+ "Accessory Kits and");
+            System.out.print(item.numberofCords+ " extension cords.");
+            System.out.print(item.numberOfKits+ "Accessory Kits");
+            System.out.print("for" + item.rentalLength + "days");
+            System.out.print("for a total of " + item.totalCost);
+        }
+    }
+
+    public void PrintActiveRentals(ArrayList<Rental> Rentals)
+    {
+        System.out.println("There are currently "+ Rentals.size()+ "active rentals." );
+        for (Rental item : Rentals)
+        {
+            System.out.print(item.rentalID );
+            System.out.print("Rented to" + item.customer.Name);
+            System.out.print("Contaning Tools:" );
+            for (Tool tool : item.tools)
+            {
+                System.out.print(tool.name);
+            }
+            System.out.print("With" + item.numberOfGear+ "Protective Gear");
+            System.out.print(item.numberOfKits+ "Accessory Kits and");
+            System.out.print(item.numberofCords+ " extension cords.");
+            System.out.print(item.numberOfKits+ "Accessory Kits");
+            System.out.print("with" + item.daysLeftOnRental + "days left on rental");
+            System.out.print("for a total of " + item.totalCost);
+        }
+    }
+
+    public void PrintToolsLeft(ArrayList<Tool> Tools)
+    {
+        System.out.println("There are currently "+ ToolsNotRented.size()+ "tools left" );
+        for(Tool tool : Tools)
+        {
+            System.out.print(tool.name);
         }
     }
 }
