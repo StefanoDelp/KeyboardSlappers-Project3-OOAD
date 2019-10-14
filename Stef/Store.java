@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.*; 
+
 
 public class Store
 {
@@ -30,10 +32,20 @@ public class Store
     {
         this.Day  = 0;
         //probaly list of tools
-        this.toolsLeft = 25;
+        this.Tools = new ArrayList<Tool>();
+        this.ActiveRentals = new ArrayList<>();
+        this.AllRentals = new ArrayList<>();
+        this.CompletedRentals = new ArrayList<>();
+        this.Customers = new ArrayList<>();
+        this.availableCustomers = new ArrayList<>();
+        this.unavailableCustomers = new ArrayList<>();
+        this.ToolsNotRented = new ArrayList<>();
+        this.ToolsRented = new ArrayList<>();
 
         createTools();
         createCustomers();
+        this.ToolsNotRented = this.Tools;
+        this.availableCustomers = this.Customers;
     }
     public int getRentTime(int maxAllowed,int minAllowed)
     {
@@ -42,6 +54,44 @@ public class Store
         int randomInteger = random.nextInt((maxAllowed-minAllowed)+1)+minAllowed;
         return randomInteger;
     }
+
+    public void createCustomers()
+    {
+        BusinessCustomer businessCustomer1 = new BusinessCustomer("businessCustomer1");
+        BusinessCustomer businessCustomer2 = new BusinessCustomer("businessCustomer2");
+        BusinessCustomer businessCustomer3 = new BusinessCustomer("businessCustomer3");
+        BusinessCustomer businessCustomer4 = new BusinessCustomer("businessCustomer4");
+
+        CasualCustomer casualCustomer1 = new CasualCustomer("casualCustomer1");
+        CasualCustomer casualCustomer2 = new CasualCustomer("casualCustomer2");
+        CasualCustomer casualCustomer3 = new CasualCustomer("casualCustomer3");
+        CasualCustomer casualCustomer4 = new CasualCustomer("casualCustomer4");
+
+        RegularCustomer regularCustomer1 = new RegularCustomer("regularCustomer1");
+        RegularCustomer regularCustomer2 = new RegularCustomer("regularCustomer2");
+        RegularCustomer regularCustomer3 = new RegularCustomer("regularCustomer3");
+        RegularCustomer regularCustomer4 = new RegularCustomer("regularCustomer4");
+        
+        this.Customers.add(businessCustomer1);
+        this.Customers.add(businessCustomer2);
+        this.Customers.add(businessCustomer3);
+        this.Customers.add(businessCustomer4);
+
+        this.Customers.add(casualCustomer1);
+        this.Customers.add(casualCustomer2);
+        this.Customers.add(casualCustomer3);
+        this.Customers.add(casualCustomer4);
+
+        this.Customers.add(regularCustomer1);
+        this.Customers.add(regularCustomer2);
+        this.Customers.add(regularCustomer3);
+        this.Customers.add(regularCustomer4);
+
+
+
+
+    }
+
 
     public void createTools()
     {
@@ -125,11 +175,11 @@ public class Store
         this.Tools.add(yardworkTool5);
     }
 
-    public void createCustomers()
+    public void CheckCustomers()
     {
         this.unavailableCustomers.clear();
         this.availableCustomers.clear();
-        for (Customer item : Customers) 
+        for (Customer item : this.Customers) 
         { 
             if (item.canRent == true) 
             {
@@ -146,7 +196,7 @@ public class Store
     {
         this.ToolsNotRented.clear();
         this.ToolsRented.clear();
-        for (Tool item : Tools) 
+        for (Tool item : this.Tools) 
         { 
             if (item.isRented == false) 
             {
@@ -158,6 +208,23 @@ public class Store
             }
         }
     }
+    public void CheckRentals()
+    {
+        ArrayList<Rental> completedRentals = new ArrayList<>();
+        for(Rental item  : ActiveRentals )
+        {
+            if(item.daysLeftOnRental == 0)
+            {
+                completedRentals.add(item);
+                this.CompletedRentals.add(item);
+            }
+        }
+        for(Rental item  : completedRentals )
+        {
+            this.ActiveRentals.remove(item);
+        }
+    }
+
 
     public void RunDay()
     {
@@ -165,13 +232,15 @@ public class Store
         printCompletedRentals(this.CompletedRentals);
         PrintActiveRentals(this.ActiveRentals);
         PrintToolsLeft(this.ToolsRented);
-        System.out.print("We made"+ this.MoneyToday +"today" );  
+        System.out.print("We made"+ this.MoneyToday +"today" );
+        this.Day = this.Day + 1;
+        SimulateDay();
     }
 
     public void CloseStore()
     {
         System.out.print("Over 35 days we had"+ this.AllRentals.size());
-        System.out.print("For a total of $"+ this.Money );
+        System.out.print("For a total of $"+ this.Money);
     }
 
     public void printCompletedRentals(ArrayList<Rental> Rentals)
@@ -224,4 +293,154 @@ public class Store
             System.out.print(tool.name);
         }
     }
+
+    public void SimulateDay()
+    {
+        CheckCustomers();
+        CheckTools();
+        CheckRentals();
+        Boolean IsRentStillGoing = true;
+        while(IsRentStillGoing == true)
+        {
+            IsRentStillGoing = TryRental();
+        }
+        
+    }
+    public boolean TryRental()
+    {
+        Random rand = new Random(); 
+        if(this.ToolsNotRented.size() >= 3 && this.availableCustomers.size() > 0)
+        {
+            Customer pickeCustomer = this.availableCustomers.get(rand.nextInt(this.availableCustomers.size()));
+            int randomInteger;
+            //if they are a business customer they have to rent 3 tools
+            if(pickeCustomer.CustomerType == 3)
+            {
+                randomInteger = 3;
+            }
+            else
+            {
+                randomInteger = rand.nextInt(pickeCustomer.ToolsCanRentCurrently);
+            }
+            ArrayList<Tool> Tools = PickTools(randomInteger);
+            int nights = getRentTime(pickeCustomer.maxNights, pickeCustomer.minNights);
+            int accessorys =  rand.nextInt(6);
+            int cords =  rand.nextInt(6);
+            int gear = rand.nextInt(6);
+            Rental NewRental = new Rental(pickeCustomer,Tools, nights, cords, accessorys, gear);
+            this.ActiveRentals.add(NewRental);
+            this.AllRentals.add(NewRental);
+            this.MoneyToday = this.MoneyToday + NewRental.totalCost;
+            return true;
+            
+        }
+        else if (this.ToolsNotRented.size() == 2)
+        {
+            Collections.shuffle(this.availableCustomers);
+            for (Customer item : this.availableCustomers)
+            {
+                if(item.ToolsCanRentCurrently >= 2 && item.MinTools <= 2)
+                {
+                    
+                    Customer pickeCustomer = this.availableCustomers.get(rand.nextInt(this.availableCustomers.size()));
+                    int randomInteger = rand.nextInt(pickeCustomer.ToolsCanRentCurrently);
+                    ArrayList<Tool> Tools = PickTools(randomInteger);
+                    int nights = getRentTime(pickeCustomer.maxNights, pickeCustomer.minNights);
+                    int accessorys =  rand.nextInt(6);
+                    int cords =  rand.nextInt(6);
+                    int gear = rand.nextInt(6);
+                    Rental NewRental = new Rental(pickeCustomer,Tools, nights, cords, accessorys, gear);
+                    this.ActiveRentals.add(NewRental);
+                    this.AllRentals.add(NewRental);
+                    this.MoneyToday = this.MoneyToday + NewRental.totalCost;
+                    return true;
+                }
+                
+                
+            }
+            return false;
+        }
+        else if (this.ToolsNotRented.size() == 1)
+        {
+            Collections.shuffle(this.availableCustomers);
+            for (Customer item : this.availableCustomers)
+            {
+                if(item.ToolsCanRentCurrently >= 2  && item.MinTools <= 1)
+                {
+                    
+                    Customer pickeCustomer = this.availableCustomers.get(rand.nextInt(this.availableCustomers.size()));
+                    int randomInteger = rand.nextInt(pickeCustomer.ToolsCanRentCurrently);
+                    ArrayList<Tool> Tools = PickTools(randomInteger);
+                    int nights = getRentTime(pickeCustomer.maxNights, pickeCustomer.minNights);
+                    int accessorys =  rand.nextInt(6);
+                    int cords =  rand.nextInt(6);
+                    int gear = rand.nextInt(6);
+                    Rental NewRental = new Rental(pickeCustomer,Tools, nights, cords, accessorys, gear);
+                    this.ActiveRentals.add(NewRental);
+                    this.AllRentals.add(NewRental);
+                    this.MoneyToday = this.MoneyToday + NewRental.totalCost;
+                    return true;
+                }
+            }
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public ArrayList<Tool> PickTools(int NumberOfTools)
+    {
+        Random rand = new Random();
+        ArrayList<Tool> ChoosenTools = new ArrayList<>();
+        if(NumberOfTools == 3)
+        {
+            Tool tool1 = this.ToolsNotRented.get(rand.nextInt(this.ToolsNotRented.size()));
+            ChoosenTools.add(tool1);
+            this.ToolsNotRented.remove(tool1);
+            this.ToolsRented.add(tool1);
+
+            Tool tool2 = this.ToolsNotRented.get(rand.nextInt(this.ToolsNotRented.size()));
+            ChoosenTools.add(tool2);
+            this.ToolsNotRented.remove(tool2);
+            this.ToolsRented.add(tool2);
+
+            Tool tool3 = this.ToolsNotRented.get(rand.nextInt(this.ToolsNotRented.size()));
+            ChoosenTools.add(tool3);
+            this.ToolsNotRented.remove(tool3);
+            this.ToolsRented.add(tool3);
+        }
+        else if (NumberOfTools == 2)
+        {
+            Tool tool1 = this.ToolsNotRented.get(rand.nextInt(this.ToolsNotRented.size()));
+            ChoosenTools.add(tool1);
+            this.ToolsNotRented.remove(tool1);
+            this.ToolsRented.add(tool1);
+
+            Tool tool2 = this.ToolsNotRented.get(rand.nextInt(this.ToolsNotRented.size()));
+            ChoosenTools.add(tool2);
+            this.ToolsNotRented.remove(tool2);
+            this.ToolsRented.add(tool2);
+        }
+        else
+        {
+            Tool tool1 = this.ToolsNotRented.get(rand.nextInt(this.ToolsNotRented.size()));
+            ChoosenTools.add(tool1);
+            this.ToolsNotRented.remove(tool1);
+            this.ToolsRented.add(tool1);
+        }
+        return ChoosenTools;
+    }
+
+    public static void main(String[] args) 
+    {
+        Store HardWare = new Store();
+        while(HardWare.Day < 36)
+        {
+            HardWare.RunDay();
+        }
+        HardWare.CloseStore();
+
+    }
+
 }

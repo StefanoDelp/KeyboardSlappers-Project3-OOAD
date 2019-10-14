@@ -2,22 +2,28 @@ import java.util.*;
 
 public class Customer
 {
+    int CustomerType;
     ArrayList<Rental> rentals;
     int maxTools;
+    int MinTools;
     int maxNights;
     boolean canRent;
     int minNights;
-    String Name;
+    int ToolsCanRentCurrently;
+    static String Name;
 
     public Customer(String NewName)
     {
         this.Name = NewName;
+        this.canRent = true;
+        this.ToolsCanRentCurrently = maxTools;
     }
 
     //I dont know if this is still needed.
     public void RentTool(Rental rental)
     {
         this.rentals.add(rental);
+        this.ToolsCanRentCurrently = this.ToolsCanRentCurrently - rental.numberOfTools;
         this.canRent = checkIfCanRent();
     }
 
@@ -39,9 +45,11 @@ public class Customer
         }
     }
     
+
+    //function needs to be fixed.
     public boolean checkIfCanRent()
     {
-        if(rentals.size() < maxTools)
+        if(this.ToolsCanRentCurrently < maxTools)
         {
             return true;
         }

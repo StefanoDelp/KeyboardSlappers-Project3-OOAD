@@ -17,7 +17,6 @@ public class Rental
     public Rental(Customer customer,ArrayList<Tool> tools,int nights,int numberofCords,int numberOfKits,int numberOfGear)
     {
         this.numberOfTools = tools.size();
-        //customer.RentTool(tool, Nights);
         this.tools = tools;
         this.customer = customer;
         this.rentalLength = nights;
