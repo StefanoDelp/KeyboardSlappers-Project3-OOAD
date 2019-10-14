@@ -177,36 +177,45 @@ public class Store
 
     public void CheckCustomers()
     {
-        this.unavailableCustomers.clear();
-        this.availableCustomers.clear();
+        //this.unavailableCustomers.clear();
+        //this.availableCustomers.clear();
+        ArrayList<Customer> Good = new ArrayList<>();
+        ArrayList<Customer> bad = new ArrayList<>();
         for (Customer item : this.Customers) 
         { 
+            
             if (item.canRent == true) 
             {
-                this.availableCustomers.add(item);
+                Good.add(item);
             }
             else
             {
-                this.unavailableCustomers.add(item);
+                bad.add(item);
             }
         }
+        this.availableCustomers = Good;
+        this.unavailableCustomers = bad;
     }
 
     public void CheckTools()
     {
-        this.ToolsNotRented.clear();
-        this.ToolsRented.clear();
+        //this.ToolsNotRented.clear();
+        //this.ToolsRented.clear();
+        ArrayList<Tool> Good = new ArrayList<>();
+        ArrayList<Tool> bad = new ArrayList<>();
         for (Tool item : this.Tools) 
         { 
             if (item.isRented == false) 
             {
-                this.ToolsNotRented.add(item);
+                Good.add(item);
             }
             else
             {
-                this.ToolsRented.add(item);
+                bad.add(item);
             }
         }
+        this.ToolsRented = bad;
+        this.ToolsNotRented = Good;
     }
     public void CheckRentals()
     {
@@ -228,69 +237,69 @@ public class Store
 
     public void RunDay()
     {
-        System.out.println("Today is Day"+this.Day);
+        System.out.println("Today is Day "+this.Day);
         printCompletedRentals(this.CompletedRentals);
         PrintActiveRentals(this.ActiveRentals);
         PrintToolsLeft(this.ToolsRented);
-        System.out.print("We made"+ this.MoneyToday +"today" );
+        System.out.println("We made "+ this.MoneyToday +"today " );
         this.Day = this.Day + 1;
         SimulateDay();
     }
 
     public void CloseStore()
     {
-        System.out.print("Over 35 days we had"+ this.AllRentals.size());
-        System.out.print("For a total of $"+ this.Money);
+        System.out.println("Over 35 days we had "+ this.AllRentals.size());
+        System.out.println("For a total of $"+ this.Money);
     }
 
     public void printCompletedRentals(ArrayList<Rental> Rentals)
     {
-        System.out.println("There are currently "+ Rentals.size()+ "completed rentals." );
+        System.out.println("There are currently "+ Rentals.size()+ " completed rentals. " );
         for (Rental item : Rentals)
         {
-            System.out.print(item.rentalID );
-            System.out.print("Rented to" + item.customer.Name);
-            System.out.print("Contaning Tools:" );
+            System.out.println(item.rentalID );
+            System.out.println("Rented to " + item.customer.Name);
+            System.out.println("Contaning Tools: " );
             for (Tool tool : item.tools)
             {
-                System.out.print(tool.name);
+                System.out.println(tool.name);
             }
-            System.out.print("With" + item.numberOfGear+ "Protective Gear");
-            System.out.print(item.numberOfKits+ "Accessory Kits and");
-            System.out.print(item.numberofCords+ " extension cords.");
-            System.out.print(item.numberOfKits+ "Accessory Kits");
-            System.out.print("for" + item.rentalLength + "days");
-            System.out.print("for a total of " + item.totalCost);
+            System.out.println("With " + item.numberOfGear+ " Protective Gear ");
+            System.out.println(item.numberOfKits+ " Accessory Kits and ");
+            System.out.println(item.numberofCords+ " extension cords. ");
+            System.out.println(item.numberOfKits+ " Accessory Kits ");
+            System.out.println(" for" + item.rentalLength + " days");
+            System.out.println(" for a total of " + item.totalCost);
         }
     }
 
     public void PrintActiveRentals(ArrayList<Rental> Rentals)
     {
-        System.out.println("There are currently "+ Rentals.size()+ "active rentals." );
+        System.out.println(" There are currently "+ Rentals.size()+ " active rentals. " );
         for (Rental item : Rentals)
         {
-            System.out.print(item.rentalID );
-            System.out.print("Rented to" + item.customer.Name);
-            System.out.print("Contaning Tools:" );
+            System.out.println(item.rentalID );
+            System.out.println(" Rented to" + item.customer.Name);
+            System.out.println(" Contaning Tools:" );
             for (Tool tool : item.tools)
             {
-                System.out.print(tool.name);
+                System.out.println(tool.name);
             }
-            System.out.print("With" + item.numberOfGear+ "Protective Gear");
-            System.out.print(item.numberOfKits+ "Accessory Kits and");
-            System.out.print(item.numberofCords+ " extension cords.");
-            System.out.print(item.numberOfKits+ "Accessory Kits");
-            System.out.print("with" + item.daysLeftOnRental + "days left on rental");
-            System.out.print("for a total of " + item.totalCost);
+            System.out.println("With" + item.numberOfGear+ "Protective Gear");
+            System.out.println(item.numberOfKits+ " Accessory Kits and");
+            System.out.println(item.numberofCords+ " extension cords.");
+            System.out.println(item.numberOfKits+ " Accessory Kits");
+            System.out.println("with " + item.daysLeftOnRental + " days left on rental");
+            System.out.println("for a total of " + item.totalCost);
         }
     }
 
     public void PrintToolsLeft(ArrayList<Tool> Tools)
     {
-        System.out.println("There are currently "+ ToolsNotRented.size()+ "tools left" );
+        System.out.println("There are currently "+ ToolsNotRented.size()+ " tools left" );
         for(Tool tool : Tools)
         {
-            System.out.print(tool.name);
+            System.out.println(tool.name);
         }
     }
 
@@ -320,6 +329,7 @@ public class Store
             }
             else
             {
+                //add a toolscan rent currently.
                 randomInteger = rand.nextInt(pickeCustomer.ToolsCanRentCurrently);
             }
             ArrayList<Tool> Tools = PickTools(randomInteger);
@@ -331,6 +341,9 @@ public class Store
             this.ActiveRentals.add(NewRental);
             this.AllRentals.add(NewRental);
             this.MoneyToday = this.MoneyToday + NewRental.totalCost;
+            this.CheckCustomers();
+            this.CheckTools();
+        
             return true;
             
         }

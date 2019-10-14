@@ -8,6 +8,7 @@ public class CasualCustomer extends Customer
         this.maxNights = 2;
         this.MinTools = 1;
         this.minNights = 1;
+        this.ToolsCanRentCurrently = maxTools;
     }
 
 }

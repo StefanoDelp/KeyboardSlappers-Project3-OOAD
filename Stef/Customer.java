@@ -17,6 +17,7 @@ public class Customer
         this.Name = NewName;
         this.canRent = true;
         this.ToolsCanRentCurrently = maxTools;
+        this.rentals = new ArrayList<>();
     }
 
     //I dont know if this is still needed.
@@ -49,10 +50,12 @@ public class Customer
     //function needs to be fixed.
     public boolean checkIfCanRent()
     {
-        if(this.ToolsCanRentCurrently < maxTools)
+        if(this.ToolsCanRentCurrently > 0)
         {
+            this.canRent = true;
             return true;
         }
+        this.canRent = false;
         return false;
     }
 

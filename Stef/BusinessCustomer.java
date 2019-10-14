@@ -7,5 +7,6 @@ public class BusinessCustomer extends Customer
         this.maxTools = 3;
         this.maxNights = 7;
         this.MinTools = 3;
+        this.ToolsCanRentCurrently = maxTools;
     }
 }
