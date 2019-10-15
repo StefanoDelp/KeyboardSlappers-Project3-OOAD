@@ -14,10 +14,11 @@ public class Rental
     int numberOfGear;
 
     //going to need this to take in 3 more things for all the extenstions 
-    public Rental(Customer customer,ArrayList<Tool> tools,int nights,int numberofCords,int numberOfKits,int numberOfGear)
+    public Rental(Customer customer,ArrayList<Tool> tools,int nights,int numberofCords,int numberOfKits,int numberOfGear,int rentalID)
     {
         this.numberOfTools = tools.size();
         this.tools = tools;
+        this.rentalID = rentalID;
         this.customer = customer;
         this.rentalLength = nights;
         this.daysLeftOnRental = nights;
@@ -60,4 +61,18 @@ public class Rental
             item.ReturnTool();
         }
     }
+    
+    public void TakeAwayDay()
+    {
+        if(this.daysLeftOnRental >= 1 )
+        {
+            this.daysLeftOnRental = this.daysLeftOnRental -1;
+        }
+        if(this.daysLeftOnRental == 0)
+        {
+            Return(this.customer, this.tools);
+        }
+    }
+
+
 }

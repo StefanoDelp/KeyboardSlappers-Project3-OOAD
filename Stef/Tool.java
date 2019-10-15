@@ -1,7 +1,6 @@
-import java.util.*;
+
 public abstract class Tool
 {
-    Integer dayyLeftOnRent;
     Integer pricePerDay;
     String name;
     Boolean isRented;
@@ -18,14 +17,12 @@ public abstract class Tool
     }
     public void GettingRented(int nights)
     {
-        this.isRented = true;
-        this.dayyLeftOnRent = nights;   
+        this.isRented = true; 
     }
 
     public void ReturnTool()
     {
         this.isRented = false;
-        this.dayyLeftOnRent = 0;
     }
 
 }

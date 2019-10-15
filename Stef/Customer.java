@@ -5,12 +5,13 @@ public class Customer
     int CustomerType;
     ArrayList<Rental> rentals;
     int maxTools;
+    Boolean RentedToday;
     int MinTools;
     int maxNights;
     boolean canRent;
     int minNights;
     int ToolsCanRentCurrently;
-    static String Name;
+    String Name;
 
     public Customer(String NewName)
     {
@@ -18,6 +19,7 @@ public class Customer
         this.canRent = true;
         this.ToolsCanRentCurrently = maxTools;
         this.rentals = new ArrayList<>();
+        this.RentedToday = false;
     }
 
     //I dont know if this is still needed.
@@ -26,6 +28,7 @@ public class Customer
         this.rentals.add(rental);
         this.ToolsCanRentCurrently = this.ToolsCanRentCurrently - rental.numberOfTools;
         this.canRent = checkIfCanRent();
+        this.RentedToday = true;
     }
 
     // this could also move to rental if needed 
@@ -42,8 +45,10 @@ public class Customer
         }
         if(Found != null)
         {
+            this.ToolsCanRentCurrently = this.ToolsCanRentCurrently + Found.numberOfTools;
             rentals.remove(Found);
         }
+        checkIfCanRent();
     }
     
 
