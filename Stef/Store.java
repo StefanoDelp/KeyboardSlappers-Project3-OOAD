@@ -521,7 +521,7 @@ public class Store
     public static void main(String[] args) 
     {
         Store HardWare = new Store();
-        new noCustomers(HardWare);
+        new NoCustomers(HardWare);
         while(HardWare.Day < 35)
         {
             HardWare.RunDay();

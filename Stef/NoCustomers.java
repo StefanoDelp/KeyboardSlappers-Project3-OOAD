@@ -1,5 +1,5 @@
-class noCustomers extends Observer {
-    public noCustomers(Store store) {
+class NoCustomers extends Observer {
+    public NoCustomers(Store store) {
         this.store = store;
         this.store.add(this);
     }
