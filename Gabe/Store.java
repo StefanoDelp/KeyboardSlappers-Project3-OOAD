@@ -10,8 +10,7 @@ public class Store
     ArrayList<Customer> Customers;
     ArrayList<Customer> availableCustomers;
     ArrayList<Customer> unavailableCustomers;
-    ArrayList<Customer> availableTools;
-    ArrayList<Customer> unavailableTools;
+
 
     public Store()
     {

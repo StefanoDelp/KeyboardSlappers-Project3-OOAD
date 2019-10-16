@@ -233,7 +233,6 @@ public class Store
         }
     }
 
-
     public void RunDay()
     {
         
@@ -438,7 +437,6 @@ public class Store
             {
                 if(item.ToolsCanRentCurrently >= 2  && item.MinTools <= 1)
                 {
-                    
                     Customer pickeCustomer = this.availableCustomers.get(rand.nextInt(this.availableCustomers.size()));
                     int randomInteger = rand.nextInt(pickeCustomer.ToolsCanRentCurrently);
                     ArrayList<Tool> Tools = PickTools(randomInteger);
