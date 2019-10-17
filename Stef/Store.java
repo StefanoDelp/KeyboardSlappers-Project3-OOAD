@@ -22,12 +22,22 @@ public class Store
     ArrayList<Tool> ToolsRented;
     ArrayList<Tool> ToolsNotRented;
 
+    private List<Observer> observers = new ArrayList<>();
+
     int Money;
     int MoneyToday;
 
     //rental id  print out rentals over the whole month.
     int rentalsSoFar;
 
+    public void add(Observer o) {
+        observers.add(o);
+    }
+    private void execute() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
+    }
     public Store()
     {
         this.Day  = 0;
@@ -194,6 +204,10 @@ public class Store
         }
         this.availableCustomers = Good;
         this.unavailableCustomers = bad;
+        if(this.availableCustomers.size() == 0 && Day > 1) {
+            execute();
+        }
+        //execute();
     }
 
     public void CheckTools()
@@ -245,7 +259,7 @@ public class Store
         printCompletedRentals(this.CompletedRentals);
         PrintActiveRentals(this.ActiveRentals);
         PrintToolsLeft(this.ToolsRented);
-        System.out.println("We made $"+ this.MoneyToday +" today " );
+        System.out.println("We made $"+ this.MoneyToday +" today\n\n" );
     }
 
     public void EndDay()
@@ -505,6 +519,7 @@ public class Store
     public static void main(String[] args) 
     {
         Store HardWare = new Store();
+        new NoCustomers(HardWare);
         while(HardWare.Day < 35)
         {
             HardWare.RunDay();
