@@ -327,7 +327,7 @@ public class Store
             System.out.println("With the following added.");
             System.out.println(item.numberOfGear+ " Protective Gear");
             System.out.println(item.numberOfKits+ " Accessory Kits and ");
-            System.out.println(item.numberofCords+ " extension cords. ");
+            System.out.println(item.Cords.Getmany() + " extension cords. ");
             System.out.println(item.numberOfKits+ " Accessory Kits ");
             System.out.println("for " + item.rentalLength + " days");
             System.out.println("for a total of " + item.totalCost);
@@ -352,7 +352,7 @@ public class Store
             System.out.println("With the following added.");
             System.out.println(item.numberOfGear+ " Protective Gear");
             System.out.println(item.numberOfKits+ " Accessory Kits and");
-            System.out.println(item.numberofCords+ " extension cords.");
+            System.out.println(item.Cords.Getmany() + " extension cords.");
             System.out.println(item.numberOfKits+ " Accessory Kits");
             System.out.println("");
             System.out.println("with " + item.daysLeftOnRental + " days left on rental");
@@ -405,9 +405,9 @@ public class Store
             }
             ArrayList<Tool> Tools = PickTools(randomInteger);
             int accessorys =  rand.nextInt(6);
-            int cords =  rand.nextInt(6);
+            IExtenstion cord = new ExtensionCordDecorator(new Extenstion2());
             int gear = rand.nextInt(6);
-            Rental NewRental = new Rental(pickeCustomer,Tools, nights, cords, accessorys, gear,this.rentalsSoFar);
+            Rental NewRental = new Rental(pickeCustomer,Tools, nights, cord, accessorys, gear,this.rentalsSoFar);
             
             this.ActiveRentals.add(NewRental);
             this.AllRentals.add(NewRental);
@@ -431,9 +431,9 @@ public class Store
                     ArrayList<Tool> Tools = PickTools(randomInteger);
                     int nights = getRentTime(pickeCustomer.maxNights, pickeCustomer.minNights);
                     int accessorys =  rand.nextInt(6);
-                    int cords =  rand.nextInt(6);
+                    IExtenstion cord = new ExtensionCordDecorator(new Extenstion2());
                     int gear = rand.nextInt(6);
-                    Rental NewRental = new Rental(pickeCustomer,Tools, nights, cords, accessorys, gear,this.rentalsSoFar);
+                    Rental NewRental = new Rental(pickeCustomer,Tools, nights, cord, accessorys, gear,this.rentalsSoFar);
                     this.ActiveRentals.add(NewRental);
                     this.AllRentals.add(NewRental);
                     this.MoneyToday = this.MoneyToday + NewRental.totalCost;
@@ -458,9 +458,9 @@ public class Store
                     ArrayList<Tool> Tools = PickTools(randomInteger);
                     int nights = getRentTime(pickeCustomer.maxNights, pickeCustomer.minNights);
                     int accessorys =  rand.nextInt(6);
-                    int cords =  rand.nextInt(6);
                     int gear = rand.nextInt(6);
-                    Rental NewRental = new Rental(pickeCustomer,Tools, nights, cords, accessorys, gear,this.rentalsSoFar);
+                    IExtenstion cord = new ExtensionCordDecorator(new Extenstion2());
+                    Rental NewRental = new Rental(pickeCustomer,Tools, nights, cord, accessorys, gear,this.rentalsSoFar);
                     this.ActiveRentals.add(NewRental);
                     this.AllRentals.add(NewRental);
                     this.MoneyToday = this.MoneyToday + NewRental.totalCost;

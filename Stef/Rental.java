@@ -9,12 +9,12 @@ public class Rental
     ArrayList<Tool> tools;
     Customer customer;
     int rentalLength;
-    int numberofCords;
+    IExtenstion Cords;
     int numberOfKits;
     int numberOfGear;
 
     //going to need this to take in 3 more things for all the extenstions 
-    public Rental(Customer customer,ArrayList<Tool> tools,int nights,int numberofCords,int numberOfKits,int numberOfGear,int rentalID)
+    public Rental(Customer customer,ArrayList<Tool> tools,int nights,IExtenstion Cords,int numberOfKits,int numberOfGear,int rentalID)
     {
         this.numberOfTools = tools.size();
         this.tools = tools;
@@ -24,22 +24,25 @@ public class Rental
         this.daysLeftOnRental = nights;
         this.numberOfGear = numberOfGear;
         this.numberOfKits = numberOfKits;
-        this.numberofCords = numberofCords;
-        this.totalCost = GetTotalPrice(tools, nights, numberofCords, numberOfKits, numberOfGear);
+        this.Cords = Cords;
+        this.totalCost = GetTotalPrice(tools, nights, Cords, numberOfKits, numberOfGear);
         Rent(customer,tools);
     }
 
-    public int GetTotalPrice(ArrayList<Tool> tools,int nights,int numberofCords,int numberOfKits,int numberOfGear)
+    public int GetTotalPrice(ArrayList<Tool> tools,int nights,IExtenstion Cords,int numberOfKits,int numberOfGear)
     {
         int total = 0;
         for (Tool item : tools) 
         {
             total = total + item.pricePerDay;
         }
-        ExtensionCord Cord = new ExtensionCord();
+    
         ProtectiveGear Gear = new ProtectiveGear();
         Accessory accessory = new Accessory();
-        total = total + ( Cord.Price * numberofCords);
+
+        IExtenstion niceCord = new ExtensionCordDecorator(new Extenstion2());
+
+        total = total + ( niceCord.price());
         total = total + ( Gear.Price *numberOfGear);
         total = total + ( accessory.Price *numberOfKits);
         return total;
