@@ -7,3 +7,5 @@ Open the folder `Final`
 run `javac Store.java`
 
 *Note: The folder `Final` contains an `output.txt` file that illustrates what the command above should return*
+
+*The assignment pdf is title `Project3_Design&UML.pdf`*
