@@ -2,6 +2,6 @@
 
 Stefano DelPiccolo, Miguel Vasquez & Gabe Raymondi
 
-Open the folder
+Open the folder `Final`
 
 run `javac Store.java`
